@@ -37,5 +37,23 @@ namespace RapidPay.Api.Controllers
                     });
             }
         }
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(LoginDTO login)
+        {
+            try
+            {
+                var user = authService.CreateUser(login);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(
+                    new ErrorResponse()
+                    {
+                        Message = ex.Message
+                    });
+            }
+        }
     }
 }

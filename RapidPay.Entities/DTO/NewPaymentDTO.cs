@@ -11,5 +11,7 @@ namespace RapidPay.Entities.DTO
         public int IdCard { get; set; }
 
         public decimal Amount { get; set; }
+
+        //public int IdUser { get; set; }
     }
 }

@@ -18,18 +18,23 @@ namespace RapidPay.Api.Controllers
     public class CardController : ControllerBase
     {
         private readonly ICardManagementService cardService;
-        public CardController(ICardManagementService _cardService) =>
-            cardService = _cardService;
+        readonly IAuthService authService;
 
+        public CardController(ICardManagementService _cardService,
+                              IAuthService authService)
+        {
+            cardService = _cardService;
+            this.authService = authService;
+        }
 
         [HttpGet]
         [Route("GetCardBalance")]
         public async Task<IActionResult> GetCardBalance(int id)
         {
             try
-            {
+            {                   
                 var card = await cardService.GetCardBalance(id);
-
+                
                 return Ok(card);
             }
             catch (Exception ex)
@@ -68,7 +73,13 @@ namespace RapidPay.Api.Controllers
         {
             try
             {
-                await cardService.Pay(payment);
+                var usr = HttpContext.User.Identity;
+                var userDto = new UserDTO();
+                var userName = User.Claims.First().Value;
+                
+
+                userDto = await authService.GetUserByName(userName);
+                await cardService.Pay(payment,userDto);
                 return Ok(
                     new
                     {

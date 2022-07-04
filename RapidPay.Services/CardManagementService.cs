@@ -22,7 +22,7 @@ namespace RapidPay.Services
 
             if (card.CardNumber.ToString().Length != CARD_FORMAT)
             {
-                throw new ArgumentException("Tarjeta no " + card.CardNumber.ToString() + " válida. " + CARD_FORMAT.ToString() + " digits expected");
+                throw new ArgumentException("Card " + card.CardNumber.ToString() + " is not valid. " + CARD_FORMAT.ToString() + " digits expected");
             }
 
             if (card.Balance <= 0)
@@ -32,7 +32,7 @@ namespace RapidPay.Services
 
             if (existsCard != null)
             {
-                throw new ArgumentException("La tarjeta" + card.CardNumber.ToString() + " ya existe");
+                throw new ArgumentException("Card " + card.CardNumber.ToString() + " not exists");
             }
 
             Card newCard = new()
@@ -59,7 +59,7 @@ namespace RapidPay.Services
 
             if (card == null)
             {
-                throw new ArgumentException("La tarjeta " + id.ToString() + " no fue encontrada");
+                throw new ArgumentException("Card " + id.ToString() + " not found");
             }
 
             return new CardDTO()
@@ -70,13 +70,13 @@ namespace RapidPay.Services
             };
         }
 
-        public async Task Pay(NewPaymentDTO payment)
+        public async Task Pay(NewPaymentDTO payment, UserDTO user)
         {
             var card = await unitOfWork.CardRepository.GetCardById(payment.IdCard);
 
             if (card == null)
             {
-                throw new ArgumentException("La tarjeta " + payment.IdCard.ToString() + " no fue encontrada");
+                throw new ArgumentException("Card " + payment.IdCard.ToString() + " not found");
             }
 
             decimal fee = ufeService.GetFee();
@@ -84,7 +84,7 @@ namespace RapidPay.Services
 
             if (amountWithFee > card.Balance)
             {
-                throw new ArgumentException("Insuficientes fondos");
+                throw new ArgumentException("not enough funds");
             }
 
             Payment newPayment = new()
@@ -94,7 +94,8 @@ namespace RapidPay.Services
                 Amount = payment.Amount,
                 Fee = fee,
                 DateOfPayment = DateTimeOffset.Now,
-                Balance = card.Balance - amountWithFee
+                Balance = card.Balance - amountWithFee,
+                UserId = user.Id
             };
 
             card.Balance -= amountWithFee;

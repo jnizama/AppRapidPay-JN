@@ -25,22 +25,7 @@ namespace RapidPay.Persistency
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Card>()
-            //    .Property(p => p.Balance)
-            //    .HasColumnType("decimal(18,2)");
-
-            //modelBuilder.Entity<Payment>()
-            //    .Property(p => p.Balance)
-            //    .HasColumnType("decimal(18,2)");
-            //modelBuilder.Entity<Payment>()
-            //    .Property(p => p.Fee)
-            //    .HasColumnType("decimal(18,2)");
-            //modelBuilder.Entity<Payment>()
-            //    .Property(p => p.Amount)
-            //    .HasColumnType("decimal(18,2)");
-            //modelBuilder.Entity<Payment>()
-            //    .Property(p => p.PreviusBalance)
-            //    .HasColumnType("decimal(18,2)");
+          
         }
 
     }

@@ -10,5 +10,7 @@ namespace RapidPay.Entities.Interfaces
     public interface IAuthService
     {
         Task<UserDTO> Login(LoginDTO login);
+        Task<UserDTO> GetUserByName(String userName);
+        Task<UserDTO> CreateUser(LoginDTO login);
     }
 }

@@ -9,5 +9,6 @@ namespace RapidPay.Entities.Interfaces
     public interface IEncryptService
     {
         string GetHash(string password);
+        string SetHash(string password);
     }
 }

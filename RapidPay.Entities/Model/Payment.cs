@@ -20,5 +20,7 @@ namespace RapidPay.Entities.Model
         public decimal Fee { get; set; }
 
         public decimal Balance { get; set; }
+
+        public int UserId { get; set; }
     }
 }

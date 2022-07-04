@@ -14,6 +14,6 @@ namespace RapidPay.Entities.Interfaces
 
         Task<CardDTO> GetCardBalance(int cardId);
 
-        Task Pay(NewPaymentDTO payment);
+        Task Pay(NewPaymentDTO payment, UserDTO user);
     }
 }

@@ -43,6 +43,7 @@ CREATE TABLE [dbo].[PaymentHistory](
 	[Amount] [decimal](18, 2) NOT NULL,
 	[Fee] [decimal](18, 2) NOT NULL,
 	[Balance] [decimal](18, 2) NOT NULL,
+	[UserId] [int] NOT NULL,
  CONSTRAINT [PK_PaymentHistory] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -58,4 +59,3 @@ GO
 
 ALTER TABLE [dbo].[PaymentHistory] CHECK CONSTRAINT [FK_PaymentHistory_Cards]
 GO
-
