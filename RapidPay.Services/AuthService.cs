@@ -20,7 +20,7 @@ namespace RapidPay.Services
         public Task<UserDTO> Login(LoginDTO login)
         {
             string encryptedPassword = encryptService.GetHash(login.Password);
-            var user = unitOfWork.UserRepository.Authenticate(login.UserName, encryptedPassword);
+            var user = unitOfWork.UserRepository.Login(login.UserName, encryptedPassword);
 
             if (user == null)
             {

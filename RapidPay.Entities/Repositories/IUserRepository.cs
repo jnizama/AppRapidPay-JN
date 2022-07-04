@@ -9,6 +9,6 @@ namespace RapidPay.Entities.Interfaces
 {
     public interface IUserRepository
     {
-        User Authenticate(string username, string password);
+        User Login(string username, string password);
     }
 }
