@@ -59,3 +59,11 @@ GO
 
 ALTER TABLE [dbo].[PaymentHistory] CHECK CONSTRAINT [FK_PaymentHistory_Cards]
 GO
+
+INSERT INTO [dbo].[Users]
+           ([UserName]
+           ,[Password])
+     VALUES
+           ('jorgenizamarios@gmail.com','10101010')
+GO
+
